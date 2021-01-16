@@ -1,4 +1,4 @@
-package authentification;
+package fr.examatic.student;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,18 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
- * Servlet implementation class Login
+ * Servlet implementation class StudentHub
  */
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/StudentHub")
+public class StudentHub extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public StudentHub() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,7 +28,7 @@ public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/teacher_hub.jsp").forward(request, response);
 	}
 
 	/**
@@ -37,10 +36,6 @@ public class Login extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		Authentification authentification = new Authentification();
-		authentification.login(request);
-		request.setAttribute("authentification", authentification);
 		doGet(request, response);
 	}
 
