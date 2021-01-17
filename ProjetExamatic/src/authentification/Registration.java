@@ -13,6 +13,15 @@ import model.Student;
 import model.Teacher;
 
 public class Registration extends DBConnection {
+	private boolean registered = false;
+
+	public boolean isRegistered() {
+		return registered;
+	}
+
+	public void setRegistered(boolean registered) {
+		this.registered = registered;
+	}
 
 	public Registration() {
 		super();

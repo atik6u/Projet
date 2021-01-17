@@ -30,13 +30,13 @@ public class SignUp extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		String first_name = request.getParameter("first_name");
-		String last_name = request.getParameter("last_name");
-		String mail = request.getParameter("mail");
-		String password = request.getParameter("password");
-		if (password != null) {
-			String hash = Integer.toString(password.hashCode());
-		}
+//		String first_name = request.getParameter("first_name");
+//		String last_name = request.getParameter("last_name");
+//		String mail = request.getParameter("mail");
+//		String password = request.getParameter("password");
+//		if (password != null) {
+//			String hash = Integer.toString(password.hashCode());
+//		}
 		this.getServletContext().getRequestDispatcher("/WEB-INF/sign_up.jsp").forward(request, response);
 	}
 
@@ -48,11 +48,15 @@ public class SignUp extends HttpServlet {
 		
 		Registration registration = new Registration();
 		if(!registration.signUp(request)) {
-			request.setAttribute("error", "Echec Ceation de compte");
-			System.out.println("Echec Ceation de compte");
+//			request.setAttribute("error", "Echec Ceation de compte");
+//			System.out.println("Echec Ceation de compte");
+//			doGet(request, response);
+		}
+		else{
+			
 		}
 		
-		doGet(request, response);
+		
 	}
 
 }
