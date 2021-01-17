@@ -14,6 +14,10 @@ import model.Teacher;
 import model.User;
 
 public class Authentification extends DBConnection{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean loggedIn = false;
 	private String userType = "";
 	private User user = null;
