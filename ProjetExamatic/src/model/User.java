@@ -1,10 +1,12 @@
 package model;
 
-public class User {
-	private String first_name;
-	private String last_name;
-	private String mail;
-	private String hash;
+import java.io.Serializable;
+
+public class User implements Serializable {
+	protected String first_name;
+	protected String last_name;
+	protected String mail;
+	protected String hash;
 	
 	public User() {
 		

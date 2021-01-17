@@ -1,4 +1,4 @@
-package fr.examatic.student;
+package fr.examatic;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import authentification.Registration;
+
 /**
- * Servlet implementation class StudentHub
+ * Servlet implementation class SignUp
  */
-@WebServlet("/StudentHub")
-public class StudentHub extends HttpServlet {
+@WebServlet("/SignUp")
+public class SignUp extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentHub() {
+    public SignUp() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +30,14 @@ public class StudentHub extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		this.getServletContext().getRequestDispatcher("/WEB-INF/student_hub.jsp").forward(request, response);
+		String first_name = request.getParameter("first_name");
+		String last_name = request.getParameter("last_name");
+		String mail = request.getParameter("mail");
+		String password = request.getParameter("password");
+		if (password != null) {
+			String hash = Integer.toString(password.hashCode());
+		}
+		this.getServletContext().getRequestDispatcher("/WEB-INF/sign_up.jsp").forward(request, response);
 	}
 
 	/**
@@ -36,6 +45,13 @@ public class StudentHub extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		Registration registration = new Registration();
+		if(!registration.signUp(request)) {
+			request.setAttribute("error", "Echec Ceation de compte");
+			System.out.println("Echec Ceation de compte");
+		}
+		
 		doGet(request, response);
 	}
 

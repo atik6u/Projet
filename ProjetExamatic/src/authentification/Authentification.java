@@ -13,19 +13,10 @@ import model.Student;
 import model.Teacher;
 import model.User;
 
-public class Authentification implements Serializable{
-	private Connection connection;
-	private boolean connected = false;
+public class Authentification extends DBConnection{
+	private boolean loggedIn = false;
 	private String userType = "";
-	private User user;
-	
-	public Connection getConnection() {
-		return connection;
-	}
-
-	public void setConnection(Connection connection) {
-		this.connection = connection;
-	}
+	private User user = null;
 
 	public Authentification() {
 		super();
@@ -67,7 +58,6 @@ public class Authentification implements Serializable{
 					hash = resultSet.getString("hash");
 					level = resultSet.getString("level");
 					user = new Student(id_student, first_name, last_name, mail, hash, level);
-					connected = true;
 				}	
 			}
 			else if (userType.equals("teacher")) {
@@ -86,17 +76,21 @@ public class Authentification implements Serializable{
 					mail = resultSet.getString("mail");
 					hash = resultSet.getString("hash");
 					user = new Teacher(id_teacher, first_name, last_name, mail, hash);
-					connected = true;
 				}
 			}
 			else {
 				throw new IllegalArgumentException("Error usertype : " + userType);
 			}
+			if(user != null) {
+				if(Integer.toString(password.hashCode()).equals(user.getHash())) {
+					loggedIn = true;
+				}
+			}
 			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			connected = false;
+			loggedIn = false;
 			System.out.println("Problème de connexion à la base de données");
 		} finally {
 			try {
@@ -123,29 +117,14 @@ public class Authentification implements Serializable{
 //			this.connected = false;
 //		}
 	}
-	
-	public void connect() {
-			
-			// Chargement du driver de MySQL 
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");	// exception surveillée
-			} catch (ClassNotFoundException e) {
-				System.out.println("Le driver n'est pas chargé");
-			}
-			//se connecter à la base de données
-			try {
-				this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Examatic?useSSL=false", "root", "root");
-			} catch (Exception e) {
-				System.out.println("Erreur connexion à la base des donnees");
-			}
-		}
 
-	public boolean isConnected() {
-		return connected;
+
+	public boolean isLoggedIn() {
+		return loggedIn;
 	}
 
-	public void setConnected(boolean connected) {
-		this.connected = connected;
+	public void setLoggedIn(boolean connected) {
+		this.loggedIn = connected;
 	}
 
 	public String getUserType() {

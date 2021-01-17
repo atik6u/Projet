@@ -17,22 +17,42 @@
     <servlet-name>Home</servlet-name>
     <url-pattern>/home</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <servlet-name>Login</servlet-name>
-    <servlet-class>authentification.Login</servlet-class>
+    <servlet-class>fr.examatic.Login</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
+  
   <servlet>
     <description></description>
     <display-name>SignUp</display-name>
     <servlet-name>SignUp</servlet-name>
-    <servlet-class>fr.examatic.Home</servlet-class>
+    <servlet-class>fr.examatic.SignUp</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>SignUp</servlet-name>
     <url-pattern>/signup</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>StudentHub</servlet-name>
+    <servlet-class>fr.examatic.student.StudentHub</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>StudentHub</servlet-name>
+    <url-pattern>/student</url-pattern>
+  </servlet-mapping>
+  
+    <servlet>
+    <servlet-name>TeacherHub</servlet-name>
+    <servlet-class>fr.examatic.student.TeacherHub</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TeacherHub</servlet-name>
+    <url-pattern>/teacher</url-pattern>
   </servlet-mapping>
 </web-app>

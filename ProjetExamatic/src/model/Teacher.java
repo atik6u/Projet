@@ -2,10 +2,6 @@ package model;
 
 public class Teacher extends User{
 	private int id_teacher;
-	private String first_name;
-	private String last_name;
-	private String mail;
-	private String hash;
 	
 	public Teacher(int id_teacher, String first_name, String last_name, String mail, String hash) {
 		super(first_name, last_name, mail, hash);
