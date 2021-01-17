@@ -10,16 +10,16 @@
 <body>
 	 Hello.........	
 	 <form action="login" method="post">
-	 	<input type="radio" id="student" name="usertype" value="student" checked>
+	 	<input type="radio" id="student" name="usertype" value="student" checked required/>
 	 	<label for="huey">Étudiant</label>
-	 	<input type="radio" id="teacher" name="usertype" value="teacher">
+	 	<input type="radio" id="teacher" name="usertype" value="teacher" required/>
 	 	<label for="huey">Enseignant</label>
 	 	<br/>
 	 	<label for="uname"><b>Nom d'utilisateur</b></label>
-	    <input type="text" placeholder="Entrer nom d'utilisateur" name="username" required>
+	    <input type="text" placeholder="Entrer nom d'utilisateur" name="username" required />
 	
 	    <label for="psw"><b>Mot de passe</b></label>
-	    <input type="password" placeholder="Entrer mot de pass" name="password" required><br>
+	    <input type="password" placeholder="Entrer mot de pass" name="password" required /><br>
 	
 	    <button type="submit">Connexion</button>
 	 </form>
@@ -41,7 +41,7 @@
 	</p>
 	<p>
 	Vous n'avez pas un compte? 
-	<a href="/signup">Cliquez ici pour créer un compte.</a>
+	<a href="SignUp">Cliquez ici pour créer un compte.</a>
 	</p>
 	
 	

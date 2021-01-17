@@ -43,22 +43,28 @@ public class Login extends HttpServlet {
 		Authentification authentification = new Authentification();
 		authentification.login(request);
 		request.setAttribute("authentification", authentification);
-//		if (authentification.isLoggedIn()) {
-//			String userType = request.getParameter("userType");
-//			System.out.println(userType);
-//			if(userType.equals("student")) {
-//				this.getServletContext().getRequestDispatcher("/WEB-INF/student_hub.jsp").forward(request, response);
-//				System.out.println("student");
-//			}
-//			else if(userType.equals("teacher")) {
-//				this.getServletContext().getRequestDispatcher("/WEB-INF/teacher_hub.jsp").forward(request, response);
-//				System.out.println("teacher");
-//
-//			}
-//		}
-//		String error = "Vérifiez votre nom d'utilisateur et mot de passe";
-//		request.setAttribute("error" ,error);
-		doGet(request, response);
+		if (authentification.isLoggedIn()) {
+			String userType = request.getParameter("usertype");
+			System.out.println("User type : " + userType);
+			
+			if(userType == null) {
+				
+				doGet(request, response);
+				String error = "Choisissez le type de votre compte";
+				request.setAttribute("error", error);
+				return;
+			}
+			if(userType.equals("student")) { 
+				this.getServletContext().getRequestDispatcher("/WEB-INF/student_hub.jsp").forward(request, response);
+			}
+			else if(userType.equals("teacher")) {
+				this.getServletContext().getRequestDispatcher("/WEB-INF/teacher_hub.jsp").forward(request, response);
+			}
+		} else {
+			String error = "Vérifiez votre nom d'utilisateur et mot de passe";
+			request.setAttribute("error" ,error);
+			doGet(request, response);		
+		}
 	}
 
 }
