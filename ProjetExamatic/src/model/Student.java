@@ -1,6 +1,10 @@
 package model;
 
 public class Student extends User{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3454670726658376362L;
 	private int id_student;
 	private String level;
 	

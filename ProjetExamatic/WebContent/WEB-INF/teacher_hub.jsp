@@ -11,6 +11,6 @@
 	<h1>Hello Teacher</h1>
 	<c:out value="${user}"/>
 	
-	<button href="login"/>
+	<a href="logout">Déconnecter</a>
 </body>
 </html>
