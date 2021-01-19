@@ -48,12 +48,11 @@ public class SignUp extends HttpServlet {
 		
 		Registration registration = new Registration();
 		if(!registration.signUp(request)) {
-//			request.setAttribute("error", "Echec Ceation de compte");
-//			System.out.println("Echec Ceation de compte");
-//			doGet(request, response);
+			doGet(request, response);
 		}
 		else{
-			
+			request.setAttribute("alert", "Votre compte a été créé.");
+			request.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		}
 		
 		
