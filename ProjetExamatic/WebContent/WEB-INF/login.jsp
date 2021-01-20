@@ -38,13 +38,23 @@
 		        <br />
 		    </c:otherwise>
 		</c:choose>
+
 	</p>
 	<p>
 	Vous n'avez pas un compte? 
 	<a href="SignUp">Cliquez ici pour créer un compte.</a>
 	</p>
 	
+<<<<<<< HEAD
 	</div>
 	
+=======
+			
+	<c:if test="${alert != null}">
+		<div class="alert alert-success" role="alert">
+			<c:out value="${alert}"/>
+		</div>
+	</c:if>
+>>>>>>> branch 'master' of https://github.com/atik6u/Projet.git
 </body>
 </html>

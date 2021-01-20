@@ -13,6 +13,15 @@ import model.Student;
 import model.Teacher;
 
 public class Registration extends DBConnection {
+	private boolean registered = false;
+
+	public boolean isRegistered() {
+		return registered;
+	}
+
+	public void setRegistered(boolean registered) {
+		this.registered = registered;
+	}
 
 	public Registration() {
 		super();
@@ -29,9 +38,13 @@ public class Registration extends DBConnection {
 		String password_conf = request.getParameter("password_conf");
 		
 		if (password == null) {
+			request.setAttribute("error", "Verifier que vous avez choisi un mot de passe. ");
+			System.out.println("Echec mot de passe null");
 			return false;
 		}
 		if (!password.equals(password_conf)) {
+			request.setAttribute("error", "Verifier que vous avez entrez le même mot de passe dans les deux champs \"Mot de passe\" et \"Confirmer le mot de passe\". ");
+			System.out.println("Echec Verification du mot de passe");
 			return false;
 		}
 		String hash = Integer.toString(password.hashCode());
@@ -61,6 +74,8 @@ public class Registration extends DBConnection {
 				Student student = new Student(0, first_name, last_name, username, hash, level);
 
 				if(resultSet.next()) {
+					request.setAttribute("error", "Le nom d'utilisateur est pris. Voulez-vous en choisir un nouveau.");
+					System.out.println("Echec username");
 					return false;
 				}
 				try {
@@ -92,6 +107,8 @@ public class Registration extends DBConnection {
 				Teacher teacher = new Teacher(0, first_name, last_name, username, hash);
 
 				if(resultSet.next()) {
+					request.setAttribute("error", "Le nom d'utilisateur est pris. Voulez-vous en choisir un nouveau.");
+					System.out.println("Echec username");
 					return false;
 				}
 				try {

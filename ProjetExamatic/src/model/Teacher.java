@@ -1,6 +1,10 @@
 package model;
 
 public class Teacher extends User{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3420353304153062L;
 	private int id_teacher;
 	
 	public Teacher(int id_teacher, String first_name, String last_name, String mail, String hash) {

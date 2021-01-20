@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import authentification.Authentification;
+import model.User;
 
 
 /**
@@ -54,6 +55,8 @@ public class Login extends HttpServlet {
 				request.setAttribute("error", error);
 				return;
 			}
+			User user = authentification.getUser();
+			request.setAttribute("user", user);
 			if(userType.equals("student")) { 
 				this.getServletContext().getRequestDispatcher("/WEB-INF/student_hub.jsp").forward(request, response);
 			}
