@@ -1,5 +1,6 @@
 package authentification;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -49,7 +50,17 @@ public class Registration extends DBConnection {
 			System.out.println("Echec Verification du mot de passe");
 			return false;
 		}
-		String hash = Integer.toString(password.hashCode());
+		
+		String hash;
+		try {
+			hash = Encryption.Encrypt(password);
+		} catch (NoSuchAlgorithmException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			request.setAttribute("error", "Erreur Cryptage");
+			System.out.println("Echec Encryption");
+			return false;
+		}
 		
 		this.connect();
 		
