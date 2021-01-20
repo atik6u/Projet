@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div align="center">
 	 Hello.........	
 	 <form action="login" method="post">
 	 	<input type="radio" id="student" name="usertype" value="student" checked required/>
@@ -17,7 +18,6 @@
 	 	<br/>
 	 	<label for="uname"><b>Nom d'utilisateur</b></label>
 	    <input type="text" placeholder="Entrer nom d'utilisateur" name="username" required />
-	
 	    <label for="psw"><b>Mot de passe</b></label>
 	    <input type="password" placeholder="Entrer mot de pass" name="password" required /><br>
 	
@@ -44,7 +44,7 @@
 	<a href="SignUp">Cliquez ici pour créer un compte.</a>
 	</p>
 	
-	
+	</div>
 	
 </body>
 </html>
