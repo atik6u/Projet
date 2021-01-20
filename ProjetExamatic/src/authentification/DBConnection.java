@@ -3,17 +3,13 @@ package authentification;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
-import javax.servlet.http.HttpServletRequest;
-
-import model.Student;
-import model.Teacher;
-import model.User;
 
 public class DBConnection implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 9100362388388287362L;
 	protected Connection connection;
 	
 	public Connection getConnection() {

@@ -1,7 +1,5 @@
 package authentification;
 
-import java.io.Serializable;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +11,10 @@ import model.Student;
 import model.Teacher;
 
 public class Registration extends DBConnection {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6053051423885189427L;
 	private boolean registered = false;
 
 	public boolean isRegistered() {
@@ -37,8 +39,8 @@ public class Registration extends DBConnection {
 		String password = request.getParameter("password");
 		String password_conf = request.getParameter("password_conf");
 		
-		if (password == null) {
-			request.setAttribute("error", "Verifier que vous avez choisi un mot de passe. ");
+		if (password == null || first_name == null || last_name == null || username == null || password == null || password_conf == null) {
+			request.setAttribute("error", "Verifier que vous avez crempli tous les champs.");
 			System.out.println("Echec mot de passe null");
 			return false;
 		}
