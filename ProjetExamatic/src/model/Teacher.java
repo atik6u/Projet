@@ -59,5 +59,11 @@ public class Teacher extends User{
 		return "Teacher [id_teacher=" + id_teacher + ", first_name=" + first_name + ", last_name=" + last_name
 				+ ", mail=" + mail + ", hash=" + hash + "]";
 	}
+
+	@Override
+	public int getId() {
+		// TODO Auto-generated method stub
+		return id_teacher;
+	}
 	
 }

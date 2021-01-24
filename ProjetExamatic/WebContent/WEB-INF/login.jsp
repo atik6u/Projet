@@ -12,14 +12,14 @@
 	 Hello.........	
 	 <form action="login" method="post">
 	 	<input type="radio" id="student" name="usertype" value="student" checked required/>
-	 	<label for="huey">Étudiant</label>
+	 	<label for="student">Étudiant</label>
 	 	<input type="radio" id="teacher" name="usertype" value="teacher" required/>
-	 	<label for="huey">Enseignant</label>
+	 	<label for="teacher">Enseignant</label>
 	 	<br/>
-	 	<label for="uname"><b>Nom d'utilisateur</b></label>
+	 	<label for="username"><b>Nom d'utilisateur</b></label>
 	    <input type="text" placeholder="Entrer nom d'utilisateur" name="username" required />
-	    <label for="psw"><b>Mot de passe</b></label>
-	    <input type="password" placeholder="Entrer mot de pass" name="password" required /><br>
+	    <label for="password"><b>Mot de passe</b></label>
+	    <input type="password" placeholder="Entrer mot de passe" name="password" required /><br>
 	
 	    <button type="submit">Connexion</button>
 	 </form>

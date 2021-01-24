@@ -61,4 +61,21 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+  	<servlet-name>NewExam</servlet-name>
+  	<servlet-class>fr.examatic.teacher.NewExam</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>NewExam</servlet-name>
+  	<url-pattern>/new_exam</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>NewCourse</servlet-name>
+  	<servlet-class>fr.examatic.teacher.NewCourse</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>NewCourse</servlet-name>
+  	<url-pattern>/new_course</url-pattern>
+  </servlet-mapping>
+	
 </web-app>

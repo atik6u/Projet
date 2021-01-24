@@ -41,7 +41,7 @@ public class Registration extends DBConnection {
 		String password_conf = request.getParameter("password_conf");
 		
 		if (password == null || first_name == null || last_name == null || username == null || password == null || password_conf == null) {
-			request.setAttribute("error", "Verifier que vous avez crempli tous les champs.");
+			request.setAttribute("error", "Verifier que vous avez rempli tous les champs.");
 			System.out.println("Echec mot de passe null");
 			return false;
 		}

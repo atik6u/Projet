@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public abstract class User implements Serializable {
 	/**
 	 * 
 	 */
@@ -59,6 +59,8 @@ public class User implements Serializable {
 	public void setHash(String hash) {
 		this.hash = hash;
 	}
+	
+	public abstract int getId();
 	
 	
 }

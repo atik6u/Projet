@@ -74,6 +74,12 @@ public class Student extends User{
 			return false;
 		return true;
 	}
+
+	@Override
+	public int getId() {
+		// TODO Auto-generated method stub
+		return id_student;
+	}
 	
 	
 }

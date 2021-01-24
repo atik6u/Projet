@@ -57,7 +57,8 @@ public class Login extends HttpServlet {
 			}
 			User user = authentification.getUser();
 			request.setAttribute("user", user);
-			if(userType.equals("student")) { 
+			request.setAttribute("user_id", user.getId());
+			if(userType.equals("student")) {
 				this.getServletContext().getRequestDispatcher("/WEB-INF/student_hub.jsp").forward(request, response);
 			}
 			else if(userType.equals("teacher")) {
