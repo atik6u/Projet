@@ -10,13 +10,18 @@
 <body>
 	<h1>New Course</h1>
 	
-	<c:if test="${user == null}">
-		<c:set var="error" value="L'utilisateur est null" scope="session"></c:set>
-	</c:if>
-		
-	<c:out value="passing id : ${user_id}"></c:out><br/>
-
 	<form action="NewCourse" method="post">
+		<c:choose>
+			<c:when test="${user == null}">
+				<c:set var="error" value="L'utilisateur est null" scope="session"></c:set>
+			</c:when>
+			<c:otherwise>
+				<c:set var="user_id" value="${user.getId()}"></c:set>
+			</c:otherwise>
+		</c:choose>
+		
+		<input type="hidden" name="user_id" value="${user_id}"/>
+	
 		<label for="course_name"><b>Nom de cours:</b></label>
 		<input type="text" name="course_name"><br/>
 		<label for="level"><b>Niveau</b></label>

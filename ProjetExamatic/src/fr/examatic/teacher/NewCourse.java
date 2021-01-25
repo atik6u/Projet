@@ -2,7 +2,9 @@ package fr.examatic.teacher;
 
 import java.io.IOException;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,20 +58,53 @@ public class NewCourse extends HttpServlet {
 		String level = request.getParameter("level");
 		String str_id = request.getParameter("user_id");
 		
+		String error;
+		
 		System.out.println(courseName);
 		System.out.println(level);
 		System.out.println(str_id);
 		
 		
 		if (courseName == null || level == null || str_id == null) {
-			request.setAttribute("error", "Verifier que vous avez rempli tous les champs.");
+			error = "Verifier que vous avez rempli tous les champs.";
+			request.setAttribute("error", error);
 			System.out.println("Echec parametre null addCourse");
 			return false;
 		}
 		
+		courseName = courseName.trim();
 		int idTeacher = Integer.parseInt(str_id);
 		DBConnection db = new DBConnection();
 		db.connect();
+		
+		//Verifier si le nom de cours existe pour ce niveau et cet enseignant
+		Statement statement = null;
+		ResultSet resultSet = null;
+		try {
+			statement = db.getConnection().createStatement();
+			
+			try {
+				System.out.println("SELECT * FROM `Course` WHERE `id_teacher` = " + idTeacher + " AND `course_name` = '" + courseName +"' AND level = '" + level + "'; ");
+				resultSet = statement.executeQuery("SELECT * FROM `Course` WHERE `id_teacher` = " + idTeacher + " AND `course_name` = '" + courseName +"' AND level = '" + level + "'; ");
+				if(resultSet.next()) {
+					request.setAttribute("error", "Le nom d'utilisateur est pris. Voulez-vous en choisir un nouveau.");
+					System.out.println("Echec username");
+					error = "Ce cours existe déjà pour le même enseignant et le même niveau";
+					request.setAttribute("error", error);
+					return false;
+				}
+				
+			}
+			catch(Exception checkCourseException) {
+				checkCourseException.printStackTrace();
+				System.out.println("Problème de connexion à la base de données (addCourse/statement/checkCourse)");
+			}
+		}
+		catch (Exception statementExcept) {
+			statementExcept.printStackTrace();
+			System.out.println("Problème de connexion à la base de données (addCourse/statement)");
+		}
+		
 		
 		PreparedStatement preparedStatement;
 		try {

@@ -11,7 +11,6 @@ public class Encryption {
 		digest = MessageDigest.getInstance("SHA-256");
 		byte[] encodedhash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 		String hash = bytesToHex(encodedhash);
-		System.out.println(hash);
 		return hash;
 	}
 	
