@@ -42,7 +42,7 @@
 	
 	<form method="get" id="myForm">
 		<a href="NewCourse">Ajouter Cours</a>
-		<a href="update.jsp">Ajouter QCM</a>
+		<a href="NewExam">Ajouter QCM</a>
 	</form>
 	
 	

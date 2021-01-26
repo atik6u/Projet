@@ -35,8 +35,6 @@ public class NewCourse extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		boolean isTeacher;
-//		if(get)
 		request.getServletContext().getRequestDispatcher("/WEB-INF/new_course.jsp").forward(request, response);
 	}
 
@@ -46,7 +44,8 @@ public class NewCourse extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		if(addCourse(request, response)) {
-			request.getServletContext().getRequestDispatcher("/WEB-INF/teacher_hub.jsp").forward(request, response);
+//			request.getServletContext().getRequestDispatcher("/WEB-INF/teacher_hub.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/TeacherHub");
 		}
 		else {
 			doGet(request, response);
@@ -60,9 +59,9 @@ public class NewCourse extends HttpServlet {
 		
 		String error;
 		
-		System.out.println(courseName);
-		System.out.println(level);
-		System.out.println(str_id);
+//		System.out.println(courseName);
+//		System.out.println(level);
+//		System.out.println(str_id);
 		
 		
 		if (courseName == null || level == null || str_id == null) {
@@ -84,7 +83,6 @@ public class NewCourse extends HttpServlet {
 			statement = db.getConnection().createStatement();
 			
 			try {
-				System.out.println("SELECT * FROM `Course` WHERE `id_teacher` = " + idTeacher + " AND `course_name` = '" + courseName +"' AND level = '" + level + "'; ");
 				resultSet = statement.executeQuery("SELECT * FROM `Course` WHERE `id_teacher` = " + idTeacher + " AND `course_name` = '" + courseName +"' AND level = '" + level + "'; ");
 				if(resultSet.next()) {
 					request.setAttribute("error", "Le nom d'utilisateur est pris. Voulez-vous en choisir un nouveau.");
