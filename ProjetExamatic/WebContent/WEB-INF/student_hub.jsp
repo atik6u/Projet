@@ -63,8 +63,8 @@
       </table>
       
     <form action="TakeExam" method="post">
-    	<input type="text" name="id_course" id="id_course"/>
-    	<input type="text" name="id_user" id="id_user" value="${user.getId()}"/>
+    	<input type="hidden" name="id_course" id="id_course" />
+    	<input type="hidden" name="id_user" id="id_user" value="${user.getId()}" />
 		<button type="submit" id="take_exam" disabled>Passer le QCM</button>
 	</form>
 	<p>

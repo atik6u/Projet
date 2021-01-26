@@ -1,7 +1,11 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
+
+import authentification.DBConnection;
 
 public class Exam implements Serializable {
 	/**
@@ -68,6 +72,12 @@ public class Exam implements Serializable {
 	
 	public Question getQuestion(int index) {
 		return questions.get(index);
+	}
+
+	@Override
+	public String toString() {
+		return "Exam [id_exam=" + id_exam + ", school_year=" + school_year + ", id_course=" + id_course + ", questions="
+				+ questions + "]";
 	}
 	
 }
