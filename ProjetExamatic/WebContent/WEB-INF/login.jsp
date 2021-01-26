@@ -60,12 +60,19 @@
 	</p>
 	
 	</div>
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/atik6u/Projet.git
 			
 	<c:if test="${alert != null}">
 		<div class="alert alert-success" role="alert">
 			<c:out value="${alert}"/>
 		</div>
 	</c:if>
+<<<<<<< HEAD
+=======
+
+>>>>>>> branch 'master' of https://github.com/atik6u/Projet.git
 </body>
 </html>

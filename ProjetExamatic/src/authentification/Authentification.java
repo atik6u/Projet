@@ -1,8 +1,5 @@
 package authentification;
 
-import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -86,7 +83,7 @@ public class Authentification extends DBConnection{
 				throw new IllegalArgumentException("Error usertype : " + userType);
 			}
 			if(user != null) {
-				if(Integer.toString(password.hashCode()).equals(user.getHash())) {
+				if(Encryption.Encrypt(password).equals(user.getHash())) {
 					loggedIn = true;
 				}
 			}
@@ -111,15 +108,6 @@ public class Authentification extends DBConnection{
 				System.out.println("Problem dans la methode close()");
 			}
 		}
-		
-		
-		
-		
-//		if (password.equals(username+"1234")) {
-//			this.connected = true;
-//		} else {
-//			this.connected = false;
-//		}
 	}
 
 

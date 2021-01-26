@@ -12,5 +12,11 @@
 	<c:out value="${user}"/>
 	
 	<a href="logout">Déconnecter</a>
+	
+	<p>
+		- Ajouter un qcm
+		- Ajouter un cours
+		- Afficher les resultats d'un qcm
+	</p>
 </body>
 </html>
