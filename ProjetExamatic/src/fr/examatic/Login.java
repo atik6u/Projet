@@ -78,11 +78,12 @@ public class Login extends HttpServlet {
 			request.setAttribute("user", user);
 			request.setAttribute("user_id", user.getId());
 			if(userType.equals("student")) {
-				response.sendRedirect(request.getContextPath() + "/StudentHub");
+				this.getServletContext().getRequestDispatcher("/WEB-INF/student_hub.jsp").forward(request, response);
+//				response.sendRedirect(request.getContextPath() + "/StudentHub");
 			}
 			else if(userType.equals("teacher")) {
-//				this.getServletContext().getRequestDispatcher("/WEB-INF/teacher_hub.jsp").forward(request, response);
-				response.sendRedirect(request.getContextPath() + "/TeacherHub");
+				this.getServletContext().getRequestDispatcher("/WEB-INF/teacher_hub.jsp").forward(request, response);
+//				response.sendRedirect(request.getContextPath() + "/TeacherHub");
 			}
 		} else {
 			String error = "Vérifiez votre nom d'utilisateur et mot de passe";

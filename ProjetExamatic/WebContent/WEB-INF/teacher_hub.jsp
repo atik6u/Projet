@@ -16,7 +16,7 @@
 
 	<h1>Hello Teacher</h1>
 	<c:out value="${user}"/>
-	<c:set var="user" value="${user}" scope="session"></c:set>
+	<c:set var="user" value="${user}" scope="page"></c:set>
 	
 	
 	<a href="logout">Déconnecter</a><br/>
