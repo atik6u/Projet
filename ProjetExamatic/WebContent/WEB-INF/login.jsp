@@ -61,7 +61,7 @@
                                     <!-- Button -->
 
                                     <div class="col-sm-12 controls">
-                                      <button type="submit">Connexion</button>
+                                      <button type="submit" class="btn btn-primary">Connecter</button>
                  
 
                                     </div>

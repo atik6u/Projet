@@ -31,6 +31,7 @@ public class DBConnection implements Serializable{
 			try {
 				this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/Examatic?useSSL=false", "root", "root");
 			} catch (Exception e) {
+				e.printStackTrace();
 				System.out.println("Erreur connexion à la base des donnees");
 			}
 		}
