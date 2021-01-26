@@ -36,13 +36,16 @@
 						 	<br/>
                             
                             <div style="margin-bottom: 25px" class="input-group">
+                            			<div align="center">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                   
+                  						 </div>
                                         <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">                                        
                                     </div>
                                 
                             <div style="margin-bottom: 25px" class="input-group">
+                            			<div align="center">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                        </div>
                                         <input type="password" placeholder="Entrer mot de pass" name="password" class="form-control" required >
                                     </div>
                                     
