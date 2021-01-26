@@ -26,6 +26,8 @@
 	
 	<form action="NewExam" method="post">
 	 	<input type="hidden" name="user_id" value="${user_id}"/>
+		<c:out value="${user_id}"></c:out>
+		<c:out value="${user.getId()}"></c:out>
 		
 		<sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
 	         url = "jdbc:mysql://localhost/Examatic"
@@ -37,7 +39,7 @@
 	     </sql:query>
 		
 	 	<label for="course"><b>Cours</b></label>
-	 	<select name="level">
+	 	<select name="course">
 	 		<c:forEach items="${result.rows}" var="course">
 			    <option value="${course.id_course}">
 			    	<c:out value="${course.course_name} (${course.level})"></c:out>
@@ -75,13 +77,13 @@
 <script type="text/javascript">
 	
 	$('#newQuestion A').click(function(e)
-			{
-			   e.preventDefault(); // prevent the link from actually redirecting
-			
-			   var count = $('#newQuestion').attr('num_questions');
-			   $('#newQuestion').attr('num_questions', count+1);
-			   //$('#newQuestion').submit();
-			});
+	{
+	   e.preventDefault(); // prevent the link from actually redirecting
+	
+	   var count = $('#newQuestion').attr('num_questions');
+	   $('#newQuestion').attr('num_questions', count+1);
+	   //$('#newQuestion').submit();
+	});
 	
 	/*	function incrementValue()
 	{

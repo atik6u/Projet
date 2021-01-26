@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class StudentHub
+ * Servlet implementation class TakeExam
  */
-@WebServlet("/StudentHub")
-public class StudentHub extends HttpServlet {
+@WebServlet("/TakeExam")
+public class TakeExam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StudentHub() {
+    public TakeExam() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,7 +28,7 @@ public class StudentHub extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		this.getServletContext().getRequestDispatcher("/WEB-INF/student_hub.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/take_exam.jsp").forward(request, response);
 	}
 
 	/**
@@ -36,8 +36,17 @@ public class StudentHub extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("Take Exam");
-		System.out.println(request.getParameter("id_user") + request.getParameter("id_course"));
+		String id_user_str = request.getParameter("id_user");
+		if(id_user_str != null) {
+			int id_user = Integer.parseInt(id_user_str);
+			request.setAttribute("id_user", id_user);
+		}
+		
+		String id_course_str = request.getParameter("id_course");
+		if(id_course_str != null) {
+			int id_course = Integer.parseInt(id_course_str);
+			request.setAttribute("id_user", id_course);
+		}
 		doGet(request, response);
 	}
 

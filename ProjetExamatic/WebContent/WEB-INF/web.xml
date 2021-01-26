@@ -78,4 +78,13 @@
   	<url-pattern>/new_course</url-pattern>
   </servlet-mapping>
 	
+	
+  <servlet>
+  	<servlet-name>TakeExam</servlet-name>
+  	<servlet-class>fr.examatic.teacher.TakeExam</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>TakeExam</servlet-name>
+  	<url-pattern>/take_exam</url-pattern>
+  </servlet-mapping>
 </web-app>
