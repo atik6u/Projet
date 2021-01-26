@@ -18,12 +18,7 @@
             <div class="panel panel-info" >
                     <div class="panel-heading">
                         <div class="panel-title">Hello ...</div>
-                        <input type="radio" id="student" name="usertype" value="student" checked required/>
-						 	<label for="huey">Étudiant</label>
-						 	<input type="radio" id="teacher" name="usertype" value="teacher" required/>
-						 	<label for="huey">Enseignant</label>
-						  	<br/>
-						 	<br/>
+                       
                         <div style="float:right; font-size: 100%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
                     </div>     
 
@@ -32,7 +27,14 @@
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                             
                         <form action="login" method="post" id="loginform" class="form-horizontal" role="form">
-                                    
+                            
+                            <input type="radio" id="student" name="usertype" value="student" checked required/>
+						 	<label for="usertype">Étudiant</label>
+						 	<input type="radio" id="teacher" name="usertype" value="teacher" required/>
+						 	<label for="usertype">Enseignant</label>
+						  	<br/>
+						 	<br/>
+                            
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                    
