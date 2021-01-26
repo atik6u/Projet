@@ -1,25 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+ pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Log in page</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 	<div align="center">
-	 Hello.........	
+	 <h1> Hello.........</h1>	
+	
 	 <form action="login" method="post">
 	 	<input type="radio" id="student" name="usertype" value="student" checked required/>
-	 	<label for="huey">Ã‰tudiant</label>
+	 	<label for="huey">Étudiant</label>
 	 	<input type="radio" id="teacher" name="usertype" value="teacher" required/>
 	 	<label for="huey">Enseignant</label>
 	 	<br/>
-	 	<label for="uname"><b>Nom d'utilisateur</b></label>
+	 	<br/>
+		 	
+		 	<table style="with: 80%">
+	    <tr>
+	     <td><label for="uname"><b>Nom d'utilisateur</b></label></td>
+	     <td><input type="text" placeholder="Entrer nom d'utilisateur" name="username" required /></td>
+	    </tr>
+	    <tr>
+	     <td> <label for="psw"><b>Mot de passe</b></label></td>
+	     <td> <input type="password" placeholder="Entrer mot de pass" name="password" required /><br></td>
+	    </tr>
+	    </table>
+	 	<!-- <label for="uname"><b>Nom d'utilisateur</b></label>
 	    <input type="text" placeholder="Entrer nom d'utilisateur" name="username" required />
 	    <label for="psw"><b>Mot de passe</b></label>
-	    <input type="password" placeholder="Entrer mot de pass" name="password" required /><br>
+	    <input type="password" placeholder="Entrer mot de pass" name="password" required /><br> -->
 	
 	    <button type="submit">Connexion</button>
 	 </form>
@@ -42,19 +56,16 @@
 	</p>
 	<p>
 	Vous n'avez pas un compte? 
-	<a href="SignUp">Cliquez ici pour crÃ©er un compte.</a>
+	<a href="SignUp">Cliquez ici pour créer un compte.</a>
 	</p>
 	
-<<<<<<< HEAD
 	</div>
 	
-=======
 			
 	<c:if test="${alert != null}">
 		<div class="alert alert-success" role="alert">
 			<c:out value="${alert}"/>
 		</div>
 	</c:if>
->>>>>>> branch 'master' of https://github.com/atik6u/Projet.git
 </body>
 </html>
