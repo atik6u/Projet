@@ -12,9 +12,16 @@
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style type="text/css">
+	td {border: 1px #DDD solid; padding: 5px; cursor: pointer;}
+
+	.selected {
+	    background-color: #dddddd;
+	    color: #ffffff;
+	}
+</style>
 <meta charset="UTF-8">
 <title>Student Hub</title>
-
 </head>
 <body>
 <div class="container">    
@@ -64,7 +71,13 @@
                <td><c:out value = "${row.level}"/></td>
             </tr>
          </c:forEach>
-      </table>
+	</table>
+      
+	<form action="TakeExam" method="post">
+    	<input type="text" name="id_course" id="id_course" />
+    	<input type="text" name="id_user" id="id_user" value="${user.getId()}" />
+		<button type="submit" id="take_exam" class="btn btn-info" disabled>Passer le QCM</button>
+	</form>
 	
 	<p>
 		- Liste des cours
@@ -143,7 +156,7 @@
 <script type="text/javascript">
 	$('#myForm A').click(function(e)
 	{
-	   e.preventDefault(); // prevent the link from actually redirecting
+	   e.preventDefault();
 	
 	   var destination = $(this).attr('href');
 	   $('#myForm').attr('action', destination);
