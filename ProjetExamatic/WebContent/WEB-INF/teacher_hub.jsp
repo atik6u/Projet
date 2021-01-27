@@ -23,10 +23,10 @@
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info" >
                     <div class="panel-heading">
-                        <div class="panel-title">Hello teacher
-						<c:out value="${user}"/>
+                        <div class="panel-title">
+						<c:out value="Bienvenue ${user.getName()} à l'espace enseignant"/>
 						<c:set var="user" value="${user}" scope="page"></c:set>
-						<a href="logout">Déconnecter</a><br/>
+						<a href="logout" class="btn btn-info">Déconnecter</a><br/>
 						</div>
                        
                         <div style="float:right; font-size: 100%; position: relative; top:-10px"><a href="#"></a></div>
@@ -35,21 +35,14 @@
                     <div style="padding-top:30px" class="panel-body" >
 
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-                        <p>
-								- Ajouter un qcm
-								- Ajouter un cours
-								- Afficher les resultats d'un qcm
-							</p>
+                       
                         <form method="get" id="myForm">
                          <div style="margin-bottom: 25px" class="input-group">
-							<a  href="NewCourse">Ajouter Cours</a>
+							<a  href="NewCourse" class="btn btn-success">Ajouter Cours</a>
 							</div>
 							 <div style="margin-bottom: 25px" class="input-group">
-							<a href="NewExam">Ajouter QCM</a>
+							<a href="NewExam" class="btn btn-success">Ajouter QCM</a>
 							</div>
-							 <div style="margin-bottom: 25px" class="input-group">
-							 <a href="NewExam">Ajouter QCM</a>
-							 </div>
 						</form>
 						<sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
          url = "jdbc:mysql://localhost/Examatic"
@@ -62,9 +55,9 @@
 	
 	<table border = "1"  class = "table-bordered">
          <tr>
-            <th>ID de cours</th>
-            <th>Nom de cours</th>
-            <th>Niveau</th>
+            <th scope="col">ID de cours</th>
+            <th scope="col">Nom de cours</th>
+            <th scope="col">Niveau</th>
          </tr>
          
          <c:forEach var = "row" items = "${result.rows}">

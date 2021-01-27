@@ -17,7 +17,7 @@
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info" >
                     <div class="panel-heading">
-                        <div class="panel-title">Hello ...</div>
+                        <div class="panel-title">Connectez-vous à l'espaces d'étudiant / enseignant</div>
                        
                         <div style="float:right; font-size: 100%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
                     </div>     

@@ -13,30 +13,17 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <meta charset="UTF-8">
-<<<<<<< HEAD
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<script src="js/bootstrap.min.js"></script> 
-<title>Insert title here</title>
-<style type="text/css">
-	td, th{border: 1px #DDD solid; padding: 5px; cursor: pointer;}
-	
-	.selected {
-	    background-color: #e8f1ff;
-	}
-</style>
-=======
 <title>Student Hub</title>
->>>>>>> branch 'post20' of https://github.com/atik6u/Projet.git
+
 </head>
 <body>
 <div class="container">    
         <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
             <div class="panel panel-info" >
                     <div class="panel-heading">
-                        <div class="panel-title">Hello Student
-						<c:out value="${user}"/>
+                        <div class="panel-title">
+						<c:out value="Bienvenue ${user.getName()} à l'espace étudiant"/>
+						<a href="logout" class="btn btn-info">Déconnecter</a><br/>
 						</div>
                        
                         <div style="float:right; font-size: 100%; position: relative; top:-10px"><a href="#"></a></div>
@@ -47,7 +34,7 @@
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                         <form method="get" id="myForm">
                          <div style="margin-bottom: 25px" class="input-group">
-							<a href="doExam">Passer un QCM</a>
+							<a href="TakeExam">Passer un QCM</a>
 							</div>
 							 <div style="margin-bottom: 25px" class="input-group">
 							<a href="NewExam">Ajouter QCM</a>
@@ -60,7 +47,7 @@
          user = "root"  password = "root"/>
          
      <sql:query dataSource = "${snapshot}" var = "result">
-         SELECT * FROM `Course` WHERE `id_teacher`= ? ;
+         SELECT * FROM `Student` S, `Course` C WHERE S.`level` = C.`level`AND `id_student` = ? ;
          <sql:param value = "${user.getId()}" />
      </sql:query>
 	
