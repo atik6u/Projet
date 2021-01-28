@@ -17,7 +17,18 @@
 <title>Créer un nouveau QCM</title>
 </head>
 <body>
-	<h1>Créer un nouveau QCM</h1>
+	
+	<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-9 col-md-offset-2 col-sm-8 col-sm-offset-2">                    
+            <div class="panel panel-info" >
+                    <div class="panel-heading">
+                        <div class="panel-title">Créer un nouveau QCM</div>
+                       
+                        
+                    </div>     
+
+                    <div style="padding-top:30px" class="panel-body" >
+
+                        <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 		
 	<c:choose>
 		<c:when test="${user == null}">
@@ -46,24 +57,28 @@
 	         <sql:param value = "${user.getId()}" />
 	     </sql:query> --%>
 		
-	 	<label for="course"><b>Cours</b></label>
-	 	<select name="course">
+		 <div class="input-group">
+    	<span class="input-group-addon">Cours</span>
+	 	<select name="course" class="form-control form-control-lg">
 	 		<c:forEach items="${result.rows}" var="course">
 			    <option value="${course.id_course}">
 			    	<c:out value="${course.course_name} (${course.level})"></c:out>
 			    </option>
 		    </c:forEach>
 		</select><br>
+		</div>
+		<br>
+		 <div class="input-group" >
+		<input type="button" onclick="addQuestion()" value="Ajouter question" class="btn btn-primary" style="margin-right:20px;"/>
+		<input type="button" value="Supprimer Question" class="btn btn-primary"/>
+		</div>
 		
-		
-		<input type="button" onclick="addQuestion()" value="Ajouter question"/>
-		<input type="button" value="Supprimer Question"/>
-		
+		<br>
 		<div id="questions">
 			
 		</div>
-		 
-		<button type="submit">Ajouter QCM</button>
+		<br>
+		<button type="submit"  class="btn btn-primary">Ajouter QCM</button>
 	 </form>
 	 
 	 
@@ -72,12 +87,17 @@
 			<c:out value="${error}"/>
 		</div>
 	 </c:if>
+	 </div>
+	 </div>
+	 </div>
+
+	 
 	 
 	 
 	 
 </body>
 <script type="text/javascript">
-	/* let num_questions = 0;
+	let num_questions = 0;
 	let choices = [];
 	
 	$('#newQuestion A').click(function(e)
@@ -102,7 +122,7 @@
 		
 		var divQuestion = document.createElement("div");
 		divQuestion.id = "question"+num_questions;
-		divQuestion.class = "form-group";
+		divQuestion.className = "form-group";
 		element = document.getElementById("questions");
 		element.appendChild(divQuestion);
 		
@@ -111,11 +131,21 @@
 		questionTitle.innerHTML = "Q" + num_questions + ".";
 		divQuestion.appendChild(questionTitle);
 		
+		
+		
 		var enonce = document.createElement("textarea");
 		enonce.placeholder = "Remplir l'énoncé";
 		enonce.name = "text" + num_questions;
 		enonce.required = true;
-		divQuestion.appendChild(enonce);
+		
+		enonce.rows = "4";
+		enonce.cols = "100";
+		var divEnonce = document.createElement("div");
+		divEnonce.align ="left";
+		divEnonce.style.paddingBottom="20px"
+		divQuestion.appendChild(divEnonce);
+		divEnonce.appendChild(enonce) 
+		//divQuestion.appendChild(enonce);
 		
 		//var jump = document.createElement("br/");
 		//element = document.getElementById("questions");
@@ -127,13 +157,21 @@
 		answer.placeholder = "Réponse: Tappez A, B, C ou D";
 		answer.name = "answer" + num_questions;
 		answer.required = true;
-		divQuestion.appendChild(answer);
+		var divAnswer = document.createElement("div");
+		//divAnswer.style.margin = "0px 0px";
+		divAnswer.align = "right";
+		divAnswer.style.paddingBottom="20px";
+		divQuestion.appendChild(divAnswer);
+		divAnswer.appendChild(answer);
+		
 		
 		
 		//Creation du boutton d'ajout des choix
 		choices.push(0);
 		var divChoice = document.createElement("div");
 		divChoice.id = "divChoice" + num_questions;
+		divChoice.style.paddingBottom="20px";
+		
 		divQuestion.appendChild(divChoice);
 		
 		var numChoice = document.createElement("input");
@@ -142,12 +180,16 @@
 		numChoice.name = "numChoice" + num_questions;
 		numChoice.value = choices[num_questions-1];
 		numChoice.required = true;
+		
 		divChoice.appendChild(numChoice);
 		
 		var addChoiceBtn = document.createElement("input");
 		addChoiceBtn.type = "button";
 		addChoiceBtn.id = "addChoiceBtn" + num_questions;
 		addChoiceBtn.value = "Ajouter Choix";
+		addChoiceBtn.className = "btn btn-primary";
+		divQuestion.style.paddingBottom="20px";
+		divQuestion.appendChild(addChoiceBtn);
 		
 		addChoiceBtn.addEventListener  ("click", function() {
 			
@@ -155,12 +197,14 @@
 			
 			divChoice = document.getElementById("divChoice" + num_question);
 			
+			
 			if(choices[num_question-1] < 4) {
 				var divQuestion = document.getElementById("question"+num_question);
 				
 				var choiceLetter = document.createElement("label");
 				letter = String.fromCharCode(65 + choices[num_question-1]);
 				choiceLetter.innerHTML = letter + ".";
+				
 				divChoice.appendChild(choiceLetter);
 				
 				var choice = document.createElement("input");
@@ -168,15 +212,16 @@
 				choice.placeholder = "Choix " + letter;
 				choice.name = "choice" + letter + num_question;
 				choice.required = true;
+				choice.style.marginRight="20px";
 				divChoice.appendChild(choice);
 				
 				choices[num_question-1] += 1;
 				document.getElementById("numChoice" + num_question).value = choices[num_question-1];
 			}
 		});
-		divQuestion.appendChild(addChoiceBtn);
+		//divQuestion.appendChild(addChoiceBtn);
 		
-	} */
+	}
 
 </script>
 </html>
