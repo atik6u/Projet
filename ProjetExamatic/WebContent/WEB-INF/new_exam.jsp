@@ -52,10 +52,10 @@
 	         url = "jdbc:mysql://localhost/Examatic"
 	         user = "root"  password = "root"/>
 	         
-	     <%-- <sql:query dataSource = "${snapshot}" var = "result">
+	     <sql:query dataSource = "${snapshot}" var = "result">
 	         SELECT * FROM `Course` WHERE `id_teacher`= ? ;
 	         <sql:param value = "${user.getId()}" />
-	     </sql:query> --%>
+	     </sql:query>
 		
 		 <div class="input-group">
     	<span class="input-group-addon">Cours</span>
