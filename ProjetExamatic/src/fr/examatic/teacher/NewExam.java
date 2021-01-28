@@ -1,6 +1,9 @@
 package fr.examatic.teacher;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import authentification.DBConnection;
 import model.Choice;
 import model.Exam;
 import model.Question;
@@ -103,6 +107,58 @@ public class NewExam extends HttpServlet {
 			return false;
 		}
 		
+		//Connexion à la base de donnees
+		DBConnection db = new DBConnection();
+		db.connect();
+		
+		Statement statement = null;
+		ResultSet resultSet = null;
+		
+		try {
+			
+			//Verification que  Qcm n'existe pas deja
+			statement = db.getConnection().createStatement();
+			resultSet = statement.executeQuery("SELECT * FROM `Exam` WHERE `id_course` = " + exam.getId_course() + " AND `school_year` = " + exam.getSchool_year() + ";");
+			if(resultSet.next()) {
+				System.out.println("Erreur: Exam Existe deja");
+				return false;
+			}
+			
+			//Insertion du QCM
+			PreparedStatement preparedStatement = db.getConnection().prepareStatement("INSERT INTO `Exam`(`school_year`, `id_course`) VALUES (?,?)");
+			preparedStatement.setInt(1, exam.getSchool_year());
+			preparedStatement.setInt(2, exam.getId_course());
+			//executer la requete
+			preparedStatement.executeUpdate();
+			
+			//Recuperation de id_exam
+			resultSet = statement.executeQuery("SELECT * FROM `Exam` WHERE `id_course` = " + exam.getId_course() + " AND `school_year` = " + exam.getSchool_year() + ";");
+			
+			if(resultSet.next()) {
+				int id_exam = resultSet.getInt("id_exam");
+				//Insertion des question au QCM
+				for (Question question : exam.getQuestions()) {
+					
+				}
+				preparedStatement = db.getConnection().prepareStatement("INSERT INTO `Exam`(`school_year`, `id_course`) VALUES (?,?)");
+				preparedStatement.setInt(1, exam.getSchool_year());
+				preparedStatement.setInt(2, exam.getId_course());
+				//executer la requete
+				preparedStatement.executeUpdate();
+				
+				
+			}
+			else {
+				System.out.println("Erreur: recuperation de id_exam depuis la nase de donnees");
+				return false;
+			}
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("Echech: envoie du contenu d'exam à la base de donnees (New Exam)");
+			return false;
+		}
 		
 		return true;
 	}
