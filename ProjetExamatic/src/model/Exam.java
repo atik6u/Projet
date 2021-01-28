@@ -1,11 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
-
-import authentification.DBConnection;
 
 public class Exam implements Serializable {
 	/**
@@ -15,7 +11,7 @@ public class Exam implements Serializable {
 	private int id_exam;
 	private int school_year;
 	private int id_course;
-	private ArrayList<Question> questions = null;
+	private ArrayList<Question> questions = new ArrayList<Question>();
 	
 	public Exam() {
 		

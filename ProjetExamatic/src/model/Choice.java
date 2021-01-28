@@ -22,6 +22,12 @@ public class Choice implements Serializable{
 		this.letter = letter;
 		this.value = value;
 	}
+	
+	public Choice(char letter, String value) {
+		super();
+		this.letter = letter;
+		this.value = value;
+	}
 
 	public int getId_question() {
 		return id_question;

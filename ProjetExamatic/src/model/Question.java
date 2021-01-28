@@ -33,6 +33,12 @@ public class Question implements Serializable {
 		this.answer = answer;
 	}
 	
+	public Question(String text, ArrayList<Choice> choices, char answer) {
+		this.id_question = 0;
+		this.text = text;
+		this.choices = choices;
+		this.answer = answer;
+	}
 	
 	public Question(int id_exam, String text, ArrayList<Choice> choices, char answer) {
 		this.id_question = 0;

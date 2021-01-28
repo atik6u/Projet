@@ -20,20 +20,21 @@
 		
 	<c:choose>
 		<c:when test="${user == null}">
-			<c:set var="error" value="L'utilisateur est null" scope="session"></c:set>
+			<c:set var="error" value="L'utilisateur est null" scope="page"></c:set>
 		</c:when>
 		<c:otherwise>
 			<c:set var="user_id" value="${user.getId()}"></c:set>
+			<c:remove var="error" scope="session" />
 		</c:otherwise>
 	</c:choose>
 	
 	<form action="NewExam" method="post">
 	 	<input type="hidden" name="user_id" value="${user_id}"/>
-	 	
+	 	<input type="hidden" name="num_questions" id="num_questions" value="0"/>
 	 	<!-- 
 		<c:out value="${user_id}"></c:out>
 		<c:out value="${user.getId()}"></c:out>
-		 -->
+		  -->
 		 
 		<sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
 	         url = "jdbc:mysql://localhost/Examatic"
@@ -81,7 +82,7 @@
 	 </form>
 	 
 	 
-	 <c:if test="${error != null}">
+	 <c:if test="${error}">
 	 	<div class="alert alert-danger" role="alert">
 			<c:out value="${error}"/>
 		</div>
@@ -110,6 +111,7 @@
 		}
 		
 		num_questions++;
+		document.getElementById("num_questions").value = ''+num_questions;
 		
 		var element;
 		
@@ -125,6 +127,8 @@
 		
 		var enonce = document.createElement("textarea");
 		enonce.placeholder = "Remplir l'énoncé";
+		enonce.name = "text" + num_questions;
+		enonce.required = true;
 		divQuestion.appendChild(enonce);
 		
 		//var jump = document.createElement("br/");
@@ -134,28 +138,41 @@
 		//Creation de la reponse
 		var answer = document.createElement("input");
 		answer.id = "answer"+num_questions;
-		answer.placeholder = "Réponse";
+		answer.placeholder = "Réponse: Tappez A, B, C ou D";
+		answer.name = "answer" + num_questions;
+		answer.required = true;
 		divQuestion.appendChild(answer);
 		
 		
 		//Creation du boutton d'ajout des choix
 		choices.push(0);
+		var divChoice = document.createElement("div");
+		divChoice.id = "divChoice" + num_questions;
+		divQuestion.appendChild(divChoice);
+		
+		var numChoice = document.createElement("input");
+		numChoice.type = "hidden";
+		numChoice.id = "numChoice" + num_questions;
+		numChoice.name = "numChoice" + num_questions;
+		numChoice.value = choices[num_questions-1];
+		numChoice.required = true;
+		divChoice.appendChild(numChoice);
+		
 		var addChoiceBtn = document.createElement("input");
 		addChoiceBtn.type = "button";
 		addChoiceBtn.id = "addChoiceBtn" + num_questions;
 		addChoiceBtn.value = "Ajouter Choix";
+		
 		addChoiceBtn.addEventListener  ("click", function() {
 			
 			var num_question = parseInt(this.parentElement.id.replace('question',''));
 			
+			divChoice = document.getElementById("divChoice" + num_question);
+			
 			if(choices[num_question-1] < 4) {
 				var divQuestion = document.getElementById("question"+num_question);
 				
-				var divChoice = document.createElement("div");
-				divChoice.id = "choiceDiv"+num_question;
-				divQuestion.appendChild(divChoice);
-				
-				var choiceLetter = document.createElement("h5");
+				var choiceLetter = document.createElement("label");
 				letter = String.fromCharCode(65 + choices[num_question-1]);
 				choiceLetter.innerHTML = letter + ".";
 				divChoice.appendChild(choiceLetter);
@@ -163,12 +180,16 @@
 				var choice = document.createElement("input");
 				choice.type = "text";
 				choice.placeholder = "Choix " + letter;
+				choice.name = "choice" + letter + num_question;
+				choice.required = true;
 				divChoice.appendChild(choice);
 				
 				choices[num_question-1] += 1;
+				document.getElementById("numChoice" + num_question).value = choices[num_question-1];
 			}
 		});
 		divQuestion.appendChild(addChoiceBtn);
+		
 	}
 
 </script>
