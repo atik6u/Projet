@@ -13,6 +13,7 @@
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//WebContent/WEB-INF/new_exam.js"></script>
 <title>Créer un nouveau QCM</title>
 </head>
 <body>
@@ -40,10 +41,10 @@
 	         url = "jdbc:mysql://localhost/Examatic"
 	         user = "root"  password = "root"/>
 	         
-	     <sql:query dataSource = "${snapshot}" var = "result">
+	     <%-- <sql:query dataSource = "${snapshot}" var = "result">
 	         SELECT * FROM `Course` WHERE `id_teacher`= ? ;
 	         <sql:param value = "${user.getId()}" />
-	     </sql:query>
+	     </sql:query> --%>
 		
 	 	<label for="course"><b>Cours</b></label>
 	 	<select name="course">
@@ -61,22 +62,6 @@
 		<div id="questions">
 			
 		</div>
-		
-		
-		
-		<!-- 
-		<form method="get" id="#newQuestion" action="">
-		</form>
-		
-		 
-		<p>
-			<c:out value="Nombre des question ${num_questions}"></c:out>
-		</p>
-		
-		<c:forEach var = "i" begin = "1" end = "${num_questions}">
-			Item <c:out value = "${i}"/><p>
-		</c:forEach>
-		 -->
 		 
 		<button type="submit">Ajouter QCM</button>
 	 </form>
@@ -92,7 +77,7 @@
 	 
 </body>
 <script type="text/javascript">
-	let num_questions = 0;
+	/* let num_questions = 0;
 	let choices = [];
 	
 	$('#newQuestion A').click(function(e)
@@ -117,6 +102,7 @@
 		
 		var divQuestion = document.createElement("div");
 		divQuestion.id = "question"+num_questions;
+		divQuestion.class = "form-group";
 		element = document.getElementById("questions");
 		element.appendChild(divQuestion);
 		
@@ -190,7 +176,7 @@
 		});
 		divQuestion.appendChild(addChoiceBtn);
 		
-	}
+	} */
 
 </script>
 </html>
