@@ -41,10 +41,10 @@
 	         url = "jdbc:mysql://localhost/Examatic"
 	         user = "root"  password = "root"/>
 	         
-	     <%-- <sql:query dataSource = "${snapshot}" var = "result">
+	     <sql:query dataSource = "${snapshot}" var = "result">
 	         SELECT * FROM `Course` WHERE `id_teacher`= ? ;
 	         <sql:param value = "${user.getId()}" />
-	     </sql:query> --%>
+	     </sql:query>
 		
 	 	<label for="course"><b>Cours</b></label>
 	 	<select name="course">
@@ -77,7 +77,7 @@
 	 
 </body>
 <script type="text/javascript">
-	/* let num_questions = 0;
+	let num_questions = 0;
 	let choices = [];
 	
 	$('#newQuestion A').click(function(e)
@@ -176,7 +176,7 @@
 		});
 		divQuestion.appendChild(addChoiceBtn);
 		
-	} */
+	}
 
 </script>
 </html>

@@ -1,6 +1,3 @@
-/**
- * 
- */
 let num_questions = 0;
 	let choices = [];
 	
@@ -100,4 +97,4 @@ let num_questions = 0;
 		});
 		divQuestion.appendChild(addChoiceBtn);
 		
-	}
+	} 

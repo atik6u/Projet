@@ -3,6 +3,7 @@ package fr.examatic.teacher;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,7 +50,7 @@ public class NewExam extends HttpServlet {
 		// TODO Auto-generated method stub
 		
 		if(addExam(request, response)){
-			
+			System.out.println("QCM ajouté");
 		}
 		else {
 			doGet(request, response);
@@ -77,6 +78,7 @@ public class NewExam extends HttpServlet {
 				String text = request.getParameter("text" + i);
 				char answer = request.getParameter("answer" + i).charAt(0);
 				int numChoice = Integer.parseInt(request.getParameter("numChoice" + i));
+				System.out.println("numChoice: " + numChoice);
 				ArrayList<Choice> choices = new ArrayList<Choice>();
 				for(int j=0; j<numChoice; j++) {
 					String choiceValue = request.getParameter("choice" + (char)(65+j) + i);
@@ -88,7 +90,6 @@ public class NewExam extends HttpServlet {
 				exam.setSchool_year(school_year);
 			}
 			exam.setId_course(id_course);
-			System.out.println(exam);
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -139,12 +140,33 @@ public class NewExam extends HttpServlet {
 				exam.setId_exam(id_exam);
 				//Insertion des question au QCM
 				for (Question question : exam.getQuestions()) {
-					preparedStatement = db.getConnection().prepareStatement("INSERT INTO `Question`(`id_exam`, `text`, `answer`) VALUES (?,?,?)");
-					preparedStatement.setInt(1, exam.getSchool_year());
-					preparedStatement.setInt(2, exam.getId_course());
+					preparedStatement = db.getConnection().prepareStatement("INSERT INTO `Question`(`id_exam`, `text`, `answer`) VALUES(?,?,?)");
+					preparedStatement.setInt(1, exam.getId_exam());
+					preparedStatement.setString(2, question.getText());
 					preparedStatement.setString(3, question.getAnswer()+"");
 					//executer la requete
 					preparedStatement.executeUpdate();
+					
+					//Recuperation de id_question
+					resultSet = statement.executeQuery("SELECT * FROM `Question` WHERE `id_exam` = " + exam.getId_exam() + " and `text` = '"+ question.getText() +"' AND `answer` = '" + question.getAnswer() + "' ;");
+					if(resultSet.next()) {
+						int id_question = resultSet.getInt("id_question");
+						question.setId_question(id_question);
+						
+						for (Choice choice : question.getChoices()) {
+							preparedStatement = db.getConnection().prepareStatement("INSERT INTO `Choice`(`id_question`, `letter`, `value`) VALUES(?,?,?)");
+							preparedStatement.setInt(1, question.getId_question());
+							preparedStatement.setString(2, choice.getLetter()+"");
+							preparedStatement.setString(3, choice.getValue());
+							//executer la requete
+							preparedStatement.executeUpdate();
+						}
+					}
+					else {
+						System.out.println("Erreur: recuperation de id_question depuis la nase de donnees");
+						return false;
+					}
+					
 				}
 			}
 			else {
@@ -158,7 +180,22 @@ public class NewExam extends HttpServlet {
 			System.out.println("Echech: envoie du contenu d'exam à la base de donnees (New Exam)");
 			return false;
 		}
-		
+		finally {
+			try {
+				if (db.getConnection() != null) {
+					db.getConnection().close();
+				}
+				if (statement != null) {
+					statement.close();
+				}
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				System.out.println("Problem dans la methode close()");
+			}	
+		}
 		return true;
 	}
 }

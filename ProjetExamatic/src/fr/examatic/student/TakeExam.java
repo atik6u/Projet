@@ -55,24 +55,70 @@ public class TakeExam extends HttpServlet {
 			request.setAttribute("id_user", id_user);
 		}
 		
-		Date date = new Date();
-		// Choose time zone in which you want to interpret your Date
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Paris"));
-		cal.setTime(date);
-		int school_year = cal.get(Calendar.YEAR);
-		Exam exam = getExam(1);
-		request.setAttribute("exam", exam);
-		
+		int school_year = Calendar.getInstance().get(Calendar.YEAR);
 		String id_course_str = request.getParameter("id_course");
 		if(id_course_str != null) {
 			int id_course = Integer.parseInt(id_course_str);
 			request.setAttribute("id_course", id_course);
+			
+			int id_exam = findIdExam(school_year, id_course);
+			System.out.println("idExam = " + id_exam);
+			if(id_exam == 0) {
+				String error = "Ce QCM n'est pas dispodinble";
+				request.setAttribute("error", error);
+				this.getServletContext().getRequestDispatcher("/WEB-INF/student_hub.jsp").forward(request, response);
+			} else {
+				Exam exam = getExam(id_exam);
+				request.setAttribute("exam", exam);
+				doGet(request, response);
+			}
 		}
-		
-		
-		doGet(request, response);
 	}
 	
+private int findIdExam(int school_year, int id_course) {
+	// TODO Auto-generated method stub
+	DBConnection db = new DBConnection();
+	db.connect();
+	
+	Statement statement = null;
+	ResultSet resultSet = null;
+	
+	try {
+		statement = db.getConnection().createStatement();
+		
+		//Recuperation de id_exam
+		resultSet = statement.executeQuery("SELECT * FROM `Exam` WHERE `id_course` = " + id_course + " AND `school_year` = " + school_year + " ;");
+		if(resultSet.next()) {
+			int id_exam = resultSet.getInt("id_exam");
+			return id_exam;
+		}
+		else {
+			return 0;
+		}
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+		System.out.println("Problem dans la methode findIdExam");
+	}
+	finally {
+		try {
+			if (db.getConnection() != null) {
+				db.getConnection().close();
+			}
+			if (statement != null) {
+				statement.close();
+			}
+			if (resultSet != null) {
+				resultSet.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Problem dans la methode close()");
+		}	
+	}
+	return 0;
+}
+
 public Exam getExam( int id_exam) {
 		
 		DBConnection db = new DBConnection();
