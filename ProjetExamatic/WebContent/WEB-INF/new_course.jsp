@@ -6,9 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>New course</title>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
 <div class="container">    
@@ -25,7 +25,7 @@
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
 	
 	
-	<form action="NewCourse" method="post">
+	<form action="NewCourse" method="post" id="NewCourse">
 		<c:choose>
 			<c:when test="${user == null}">
 				<%-- <c:set var="error" value="L'utilisateur est null" scope="session"></c:set> --%>
@@ -34,10 +34,10 @@
 				<c:set var="user_id" value="${user.getId()}"></c:set>
 			</c:otherwise>
 		</c:choose>
-		 <div style="margin-bottom: 25px" class="input-group">
-         <input type="hidden" name="user_id" value="${user_id}" class="form-control" />
-          
-          </div>
+		<c:set var="user_id" value="${user.getId()}"></c:set>
+		<div style="margin-bottom: 25px" class="input-group">
+		<input type="hidden" name="user_id" value="${user_id}" class="form-control" />
+		</div>
 		
 		<div style="margin-bottom: 25px" class="input-group">
 		<label for="course_name"><b>Nom de cours:</b></label>
@@ -57,6 +57,11 @@
 	</form>
 	</div>
 	</div>
+	<c:if test="${error != null}">
+     	<div class="alert alert-danger" role="alert">
+     		<c:out value="${error}"></c:out>
+     	</div>
+     </c:if>
 	</div>
 	</div>
 

@@ -44,8 +44,8 @@ public class NewCourse extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		if(addCourse(request, response)) {
-//			request.getServletContext().getRequestDispatcher("/WEB-INF/teacher_hub.jsp").forward(request, response);
-			response.sendRedirect(request.getContextPath() + "/TeacherHub");
+			request.getServletContext().getRequestDispatcher("/WEB-INF/teacher_hub.jsp").forward(request, response);
+//			response.sendRedirect(request.getContextPath() + "/TeacherHub");
 		}
 		else {
 			doGet(request, response);
@@ -68,6 +68,12 @@ public class NewCourse extends HttpServlet {
 			error = "Verifier que vous avez rempli tous les champs.";
 			request.setAttribute("error", error);
 			System.out.println("Echec parametre null addCourse");
+			return false;
+		}
+		else if (str_id.equals("")) {
+			System.out.println("Echec id_user null addCourse");
+			error = "Verifier que vous avez rempli tous les champs.";
+			request.setAttribute("error", error);
 			return false;
 		}
 		
@@ -128,7 +134,6 @@ public class NewCourse extends HttpServlet {
 				System.out.println("Problem dans la methode close()");
 			}
 		}
-		
 		return true;
 	}
 	

@@ -11,9 +11,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Teacher hub</title>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
 
@@ -25,7 +25,7 @@
                     <div class="panel-heading">
                         <div class="panel-title">
 						<c:out value="Bienvenue ${user.getName()} à l'espace enseignant"/>
-						<c:set var="user" value="${user}" scope="page"></c:set>
+						<c:set var="user" value="${user}" scope="session"></c:set>
 						<a href="logout" class="btn btn-info">Déconnecter</a><br/>
 						</div>
                        
@@ -37,44 +37,46 @@
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                        
                         <form method="get" id="myForm">
-                         <div style="margin-bottom: 25px" class="input-group">
-							<a  href="NewCourse" class="btn btn-success">Ajouter Cours</a>
+                        	<div style="margin-bottom: 25px" class="input-group">
+					        	<!-- <input type="text" name="user_id" value="${user_id}" class="form-control" /> -->
+								<a  href="NewCourse" class="btn btn-success">Ajouter Cours</a>
 							</div>
-							 <div style="margin-bottom: 25px" class="input-group">
-							<a href="NewExam" class="btn btn-success">Ajouter QCM</a>
+							<div style="margin-bottom: 25px" class="input-group">
+								<a href="NewExam" class="btn btn-success">Ajouter QCM</a>
 							</div>
 						</form>
 						<sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-         url = "jdbc:mysql://localhost/Examatic"
-         user = "root"  password = "root"/>
-         
-     <sql:query dataSource = "${snapshot}" var = "result">
-         SELECT * FROM `Course` WHERE `id_teacher`= ? ;
-         <sql:param value = "${user.getId()}" />
-     </sql:query>
-	
-	<table border = "1"  class = "table-bordered">
-         <tr>
-            <th scope="col">ID de cours</th>
-            <th scope="col">Nom de cours</th>
-            <th scope="col">Niveau</th>
-         </tr>
-         
-         <c:forEach var = "row" items = "${result.rows}">
-            <tr>
-               <td><c:out value = "${row.id_course}"/></td>
-               <td><c:out value = "${row.course_name}"/></td>
-               <td><c:out value = "${row.level}"/></td>
-            </tr>
-         </c:forEach>
-      </table>
-						</div>
-						</div>
+					         url = "jdbc:mysql://localhost/Examatic"
+					         user = "root"  password = "root"/>
+					         
+					     <sql:query dataSource = "${snapshot}" var = "result">
+					         SELECT * FROM `Course` WHERE `id_teacher`= ? ;
+					         <sql:param value = "${user.getId()}" />
+					     </sql:query>
 						
-						
-						
-						</div>
-						</div>
+						<table border = "1"  class = "table">
+							<thead>
+						         <tr>
+						            <th scope="col">ID de cours</th>
+						            <th scope="col">Nom de cours</th>
+						            <th scope="col">Niveau</th>
+						         </tr>
+					         </thead>
+					         <tbody>
+						         <c:forEach var = "row" items = "${result.rows}">
+						            <tr>
+						               <td><c:out value = "${row.id_course}"/></td>
+						               <td><c:out value = "${row.course_name}"/></td>
+						               <td><c:out value = "${row.level}"/></td>
+						            </tr>
+						         </c:forEach>
+					         </tbody>
+					      </table>
+					      
+					</div>
+				</div>
+			</div>
+		</div>
 					
 
 
