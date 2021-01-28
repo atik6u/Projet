@@ -136,17 +136,16 @@ public class NewExam extends HttpServlet {
 			
 			if(resultSet.next()) {
 				int id_exam = resultSet.getInt("id_exam");
+				exam.setId_exam(id_exam);
 				//Insertion des question au QCM
 				for (Question question : exam.getQuestions()) {
-					
+					preparedStatement = db.getConnection().prepareStatement("INSERT INTO `Question`(`id_exam`, `text`, `answer`) VALUES (?,?,?)");
+					preparedStatement.setInt(1, exam.getSchool_year());
+					preparedStatement.setInt(2, exam.getId_course());
+					preparedStatement.setString(3, question.getAnswer()+"");
+					//executer la requete
+					preparedStatement.executeUpdate();
 				}
-				preparedStatement = db.getConnection().prepareStatement("INSERT INTO `Exam`(`school_year`, `id_course`) VALUES (?,?)");
-				preparedStatement.setInt(1, exam.getSchool_year());
-				preparedStatement.setInt(2, exam.getId_course());
-				//executer la requete
-				preparedStatement.executeUpdate();
-				
-				
 			}
 			else {
 				System.out.println("Erreur: recuperation de id_exam depuis la nase de donnees");
