@@ -65,19 +65,35 @@
 							<tbody>
 							<c:forEach var = "row" items = "${result.rows}">
 								<tr id="row">
+								
 								   <td style="display:none;"><c:out value = "${row.id_course}"/></td>
 								   <td><c:out value = "${row.course_name}"/></td>
 								   <td><c:out value = "${row.level}"/></td>
+								   
+								   <sql:query dataSource = "${snapshot}" var = "attempt">
+								     SELECT `mark` FROM `Attempt` A, `Course` C, `Exam` E WHERE A.`id_exam` = E.`id_exam` AND E.`id_course` = C.`id_course` AND A.`id_student` = ? AND E.`id_course` = ?
+								     <sql:param value = "${user.getId()}" />
+								     <sql:param value = "${row.id_course}" />
+								   </sql:query>
+								   
 								   <td>
+								   
+								   	 <c:forEach var="unit" items="${attempt.rows}">
+								   	 	<c:set var="mark" scope="page" value="${unit.mark}"></c:set>
+								   	 </c:forEach>
+								   	 
 								     <c:choose>
 								     	<c:when test="${mark != null}">
 								     		<c:out value="${mark}/100"></c:out>
+								     		<c:remove var="mark"></c:remove>
 								     	</c:when>
 								     	<c:otherwise>
 								     		<c:out value="N/A"></c:out>
 								     	</c:otherwise>
 								     </c:choose>
+								     
 								   </td>
+								   
 								</tr>
 							</c:forEach>
 							<tbody>

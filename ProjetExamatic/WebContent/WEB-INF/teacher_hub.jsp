@@ -75,7 +75,14 @@
 					      
 					</div>
 				</div>
-				<a class="nav-link js-scroll-trigger" href="index.html"> Home</a>
+				<a class="nav-link js-scroll-trigger" href="index.html"> Home</a><br>
+				
+				<c:if test="${msg != null}">
+					<div class="alert alert-success">
+						<c:out value="${msg }"></c:out>
+					</div>
+				</c:if>
+				
 			</div>
 		</div>
 					

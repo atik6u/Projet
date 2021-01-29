@@ -153,11 +153,17 @@
 		//element.appendChild(jump);
 		
 		//Creation de la reponse
-		var answer = document.createElement("input");
+		var answer = document.createElement("select");
 		answer.id = "answer"+num_questions;
-		answer.placeholder = "Réponse: Tappez A, B, C ou D";
+//		answer.placeholder = "Réponse: Tappez A, B, C ou D";
 		answer.name = "answer" + num_questions;
 		answer.required = true;
+		
+		var option = document.createElement("option");
+		option.value = "";
+		option.innerHTML = "Réponse";
+		answer.appendChild(option);
+		
 		var divAnswer = document.createElement("div");
 		//divAnswer.style.margin = "0px 0px";
 		divAnswer.align = "right";
@@ -216,8 +222,16 @@
 				choice.style.marginRight="20px";
 				divChoice.appendChild(choice);
 				
+				var selectAnswer = document.getElementById("answer" + num_question);
+				var option = document.createElement("option");
+				option.value = String.fromCharCode(65 + choices[num_question-1]);
+				option.innerHTML = String.fromCharCode(65 + choices[num_question-1]);
+				selectAnswer.appendChild(option);
+				
 				choices[num_question-1] += 1;
 				document.getElementById("numChoice" + num_question).value = choices[num_question-1];
+				
+				
 			}
 		});
 		//divQuestion.appendChild(addChoiceBtn);

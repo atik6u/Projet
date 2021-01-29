@@ -51,6 +51,9 @@ public class NewExam extends HttpServlet {
 		
 		if(addExam(request, response)){
 			System.out.println("QCM ajouté");
+			String msg = "Le QCM est Ajouté";
+			request.setAttribute("msg", msg);
+			request.getServletContext().getRequestDispatcher("/WEB-INF/teacher_hub.jsp").forward(request, response);
 		}
 		else {
 			doGet(request, response);
