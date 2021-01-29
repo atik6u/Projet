@@ -23,6 +23,7 @@
                     <div class="panel-heading">
                         <div class="panel-title">
 							<c:out value="Bienvenue ${user.getName()} à l'espace étudiant"/>
+							<c:set var="user" scope="session" value="${user}"></c:set>
 							<div class="float-right">
 								<a href="logout" class="btn btn-info" >Déconnecter</a><br/>
 							</div>
@@ -36,10 +37,10 @@
                         <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
                         <form method="get" id="myForm">
                          <div style="margin-bottom: 25px" class="input-group">
-							<a href="TakeExam">Passer un QCM</a>
+							<a href="TakeExam">Paramêtres du compte</a>
 							</div>
 							 <div style="margin-bottom: 25px" class="input-group">
-							<a href="NewExam">Ajouter QCM</a>
+							<a href="NewExam">Moyenne générale</a>
 							</div>
 						</form>
 						
@@ -58,6 +59,7 @@
 								   <th  style="display:none;">ID de cours</th>
 								   <th>Nom de cours</th>
 								   <th>Niveau</th>
+								   <th>Note</th>
 								</tr>
 							<thead>
 							<tbody>
@@ -66,20 +68,37 @@
 								   <td style="display:none;"><c:out value = "${row.id_course}"/></td>
 								   <td><c:out value = "${row.course_name}"/></td>
 								   <td><c:out value = "${row.level}"/></td>
+								   <td>
+								     <c:choose>
+								     	<c:when test="${mark != null}">
+								     		<c:out value="${mark}/100"></c:out>
+								     	</c:when>
+								     	<c:otherwise>
+								     		<c:out value="N/A"></c:out>
+								     	</c:otherwise>
+								     </c:choose>
+								   </td>
 								</tr>
 							</c:forEach>
 							<tbody>
 						</table>
 					      
 						<form action="TakeExam" method="post">
-					    	<input type="hidden" name="id_course" id="id_course" />
+					    	<input type="hidden" name="id_course" id="id_course" value="${id_course}"/>
 					    	<input type="hidden" name="id_user" id="id_user" value="${user.getId()}" />
+					    	<c:set var="id_user" scope="session" value="${user.getId()}"></c:set>
 					    	<br/>
 							<button type="submit" id="take_exam" class="btn btn-info" disabled>Passer le QCM</button>
 						</form>
 						
+						
 					</div>
 				</div>
+				<c:if test="${error != null}">
+					<div class="alert alert-danger" role="alert">
+						<c:out value="${error}"></c:out>
+					</div>
+				</c:if>
 			</div>
 	</div>
 						
