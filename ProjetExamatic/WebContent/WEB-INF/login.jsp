@@ -19,7 +19,7 @@
                     <div class="panel-heading">
                         <div class="panel-title">Connectez-vous à l'espaces d'étudiant / enseignant</div>
                        
-                        <div style="float:right; font-size: 100%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
+                        <div style="float:right; font-size: 100%; position: relative; top:-10px"><a href="#">mot de passe oublié?</a></div>
                     </div>     
 
                     <div style="padding-top:30px" class="panel-body" >
@@ -39,7 +39,7 @@
                             			<div align="center">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                   						 </div>
-                                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="username or email">                                        
+                                        <input id="login-username" type="text" class="form-control" name="username" value="" placeholder="nom d'utilisatuer">                                        
                                     </div>
                                 
                             <div style="margin-bottom: 25px" class="input-group">
@@ -54,7 +54,7 @@
                             <div class="input-group">
                                       <div class="checkbox">
                                         <label>
-                                          <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+                                          <input id="login-remember" type="checkbox" name="remember" value="1"> Se souvenir de moi
                                         </label>
                                       </div>
                                     </div>
@@ -184,10 +184,10 @@
 						<c:out value="${alert}"/>
 					</div>
 				</c:if>
-	
+				
                          </div>
                     </div>
-
+					<a class="nav-link js-scroll-trigger" href="index.html"> Home</a>
                
                
                 

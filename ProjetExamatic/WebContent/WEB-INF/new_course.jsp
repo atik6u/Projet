@@ -62,6 +62,7 @@
      		<c:out value="${error}"></c:out>
      	</div>
      </c:if>
+     <a class="nav-link js-scroll-trigger" href="index.html"> Home</a>
 	</div>
 	</div>
 

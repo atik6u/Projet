@@ -75,6 +75,7 @@
 					      
 					</div>
 				</div>
+				<a class="nav-link js-scroll-trigger" href="index.html"> Home</a>
 			</div>
 		</div>
 					
